@@ -1,11 +1,18 @@
 <template>
-    <div class="home-page">首页大屏</div>
+    <div class="home-page">
+      <FunctionMenu/>
+      <MapView/>
+    </div>
   </template>
   
   <script>
+  import MapView from '../common/MapView.vue';
+  import  FunctionMenu  from "../common/FunctionMenu.vue";
+  
   export default {
     name: 'HomePage',
-    components: {},
+    components: {FunctionMenu,MapView},
+    
   };
   </script>
   
@@ -13,7 +20,11 @@
   .home-page {
     height: 100%;
     width: 100%;
-    background-color: bisque;
+  }
+  #map-container{
+    position: relative;
+    width: 100%;
+    height: 95%;
   }
   </style>
   

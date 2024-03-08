@@ -14,6 +14,7 @@ export default new VueRouter({
             path: '/roadModel',
             component: RoadModel
         },
+        
     ],
     mode: 'history'
 })

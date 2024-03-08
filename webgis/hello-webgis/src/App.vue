@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import MapView from './components/common/MapView.vue';
 import HeaderLayout from './components/header/HeaderLayout.vue';
+
 export default {
   name: 'App',
-  components: {MapView,HeaderLayout},
+  components: {HeaderLayout},
 };
 </script>
 
