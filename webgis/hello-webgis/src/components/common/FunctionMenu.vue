@@ -11,13 +11,13 @@
         <el-menu-item index="3">测距</el-menu-item>
         <el-menu-item index="4">数据统计</el-menu-item>
         <el-menu-item index="5" disabled>结果导出</el-menu-item>
-        <div class="locationIcon"><i class="el-icon-map-location"></i>周宁</div>       
+        <div class="locationIcon" @click="locateto"><i class="el-icon-map-location" ></i><span>周宁</span></div>       
     </el-menu>
   </div>
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex';
 export default {
     data() {
       return {
@@ -30,9 +30,15 @@ export default {
       handleSelect(key, keyPath) {
         console.log(typeof key, keyPath);
       },
+      locateto(){
+        this.mapView.goTo({
+            target:[119.337, 27.105],
+            zoom: 16
+        },{duration:500})
+      }
     },
     computed: {
-      
+      ...mapGetters('MapView',['mapView']),  
     },
   }
 </script>

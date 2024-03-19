@@ -1,37 +1,40 @@
 <template>
     <div class="roadModel-page">
         <FunctionMenu/>
-       <!--  <div id="map-container"></div> -->
-       <MapView/>
+        <div ref="map-container" id="map-container"></div>
     </div>
   </template>
   
   <script>
-  import MapView from '../common/MapView.vue';
+  import { mapGetters ,mapActions,} from 'vuex';
   import  FunctionMenu  from "../common/FunctionMenu.vue";
   
-  import { mapState } from 'vuex';
-
   export default {
-    name: 'RoadModel',
-    components: {FunctionMenu,MapView},
+    name: 'HomePage',
+    components: {FunctionMenu},
     computed: {
-     /*  ...mapState({
-        mapView: state => state.MapView._defaultMapView // MapView 是你在 Vuex 中定义的模块名
-      }) */
-    },
-    mounted() {
-     /*  // 在组件挂载完成后，检查是否有地图视图对象，如果有，则加载地图
-      if (this.mapView) {
-        this.loadMap();
-      } */
+      ...mapGetters('MapView', ['mapView'])
     },
     methods: {
-     /*  loadMap() {
-        // 在这里使用地图视图对象加载地图
-        this.mapView.container = "map-container"
-      } */
+      ...mapActions('MapView', ['setDefaultMapView','addLayer','clearLayers','addSomeLayers']),
+      async AddSomeLayer() {
+        const layerInfos = [{
+				  url: "http://localhost:6080/arcgis/rest/services/MapServeTest/dianTest/MapServer", 
+          layerId: 1         
+		  	}];
+        await this.addSomeLayers(layerInfos);
+      }
+    },
+    async mounted() {
+      await this.setDefaultMapView();
+      this.mapView.container = this.$refs['map-container'];
+      this.AddSomeLayer();
+    },
+    beforeDestroy() {
+      this.clearLayers();
+      this.mapView.container = null;
     }
+    
   };
   </script>
   

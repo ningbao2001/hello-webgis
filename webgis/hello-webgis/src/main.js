@@ -11,9 +11,11 @@ Vue.config.productionTip = false
 //应用插件
 Vue.use(ElementUI);
 Vue.use(VueRouter)
-new Vue({
-  el: '#app',
-  render: h => h(App),
-  router,
-  store,
-});
+store.dispatch('MapView/setDefaultMapView').then(() => {
+  new Vue({
+    el: '#app',
+    render: h => h(App),
+    router,
+    store,
+  });
+})

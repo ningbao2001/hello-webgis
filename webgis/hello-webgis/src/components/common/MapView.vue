@@ -46,8 +46,6 @@ export default {
         }   
       });
       Mapview.ui._removeComponents(["attribution"]);///移除底部ESRI logo
-      this.$store.commit('MapView/_setDefaultMapView',Mapview);
-      console.log(this.$store.state.MapView);
     },
 
   },
